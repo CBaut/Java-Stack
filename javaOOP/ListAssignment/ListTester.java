@@ -13,9 +13,9 @@ public class ListTester {
     }
 }
 // Objectives:
-// [] Practice creating classes and objects.
+// [x] Practice creating classes and objects.
 
-// [] Learn and implement a singly linked list in Java.
+// [x] Learn and implement a singly linked list in Java.
 
 // Tasks:
 // [x] Create a Node class like the above.

@@ -15,6 +15,7 @@ public class SinglyLinkedList {
             }
             runner.next = newNode;
         }
+        return;
     }
     public void remove() {
         // remove a node from the end of list
@@ -27,8 +28,9 @@ public class SinglyLinkedList {
             }
             runner.next = null;
         }
+        return;
     }
-    public printValues() {
+    public void printValues() {
         // print all values of each node in the list in order
         if(head == null) {
             return;
@@ -39,27 +41,26 @@ public class SinglyLinkedList {
                 runner = runner.next;
             }
         }
-        return;
     }
-    public find(int value) {
+    public Node find(int value) {
         // return the first node with the value in the parameter
         if(head == null) {
             return null;
         } else {
             Node runner = head;
-            while runner != null) {
+            while (runner != null) {
                 if(runner.value == value) {
                     return runner;
                 }
                 runner = runner.next;
             }
         }
-            return null;
+        return null;
     }
-    public removeAt(int index) {
+    public void removeAt(int index) {
         // remove the node after n nodes where n is the parameter
         if(head == null) {
-            return null;
+            return;
         }else {
             Node runner = head;
             for(int i = 0; i < index - 1; i++) {
@@ -68,6 +69,7 @@ public class SinglyLinkedList {
             // store the location of the node after the one we want to remove
             Node afterIndex = runner.next.next;
             // point the node tho this index before to the node at index after
-            runner.next = afterIndx
+            runner.next = afterIndex;
         }
     }
+}
