@@ -19,15 +19,40 @@ public class Human {
 //		reduce health of attacked human by the strength of current human
 		human.health -= this.strength;
 	}
+	public int getHealth() {
+		return this.health;
+	}
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	public int getHealth() {
-		System.out.println("Health is: " + this.health);
-		return this.health;
-	}
 	public void updateHealth(int health) {
 		this.health += health;
-		System.out.println("Health is updated... " + this.getHealth());
+	}
+	public int getIntelligence() {
+		return this.intelligence;
+	}
+	public void setIntelligence(int intelligence) {
+		this.intelligence = intelligence;
+	}
+	public void updateIntelligence(int intelligence) {
+		this.intelligence += intelligence;		
+	}
+	public int getStrength() {
+		return this.strength;
+	}
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+	public void updateStrength(int strength) {
+		this.strength += strength;
+	}
+	public int getStealth() {
+		return this.stealth;
+	}
+	public void setStealth(int stealth) {
+		this.stealth = stealth;
+	}
+	public void updateStealth(int stealth) {
+		this.stealth += stealth;
 	}
 }
