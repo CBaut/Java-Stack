@@ -1,6 +1,10 @@
 package com.codingdojo.javaoop.calculator;
 
-public class Calculator {
+public class Calculator implements java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Double operandOne = 0.0;
 	private String operation = "";
 	private Double OperandTwo = 0.0;
