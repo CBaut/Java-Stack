@@ -1,0 +1,30 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch HellohumanApplication",
+            "request": "launch",
+            "mainClass": "com.codingdojo.hellohuman.hellohuman.HellohumanApplication",
+            "projectName": "hellohuman"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-App<com.codingdojo.springfundamentals.familiarwithrouting>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.codingdojo.springfundamentals.familiarwithrouting.App",
+            "projectName": "com.codingdojo.springfundamentals.familiarwithrouting",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-FamiliarWithRouting2Application",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.codingdojo.familiarwithrouting2.FamiliarWithRouting2Application",
+            "args": ""
+        }
+    ]
+}

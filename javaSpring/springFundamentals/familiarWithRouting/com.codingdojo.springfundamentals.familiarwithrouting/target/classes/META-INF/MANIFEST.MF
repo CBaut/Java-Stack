@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Built-By: mimi_
+Build-Jdk: 15
+Implementation-Title: Spring Boot Blank Project (from https://github.com
+ /making/spring-boot-blank)
+Implementation-Version: familiar withrouting assignment
+Implementation-Vendor-Id: com.codingdojo.springfundamentals.familiarwith
+ routing
+Implementation-Vendor: Pivotal Software, Inc.
+Main-Class: com.codingdojo.springfundamentals.familiarwithrouting.App
+Created-By: Maven Integration for Eclipse
+
