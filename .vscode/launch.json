@@ -25,6 +25,26 @@
             "console": "internalConsole",
             "mainClass": "com.codingdojo.familiarwithrouting2.FamiliarWithRouting2Application",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DisplaydateApplication<displaydate>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.codingdojo.springfundamentals.displaydate.displaydate.DisplaydateApplication",
+            "projectName": "displaydate",
+            "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.codingdojo.demo.demo.DemoApplication",
+            "projectName": "demo",
+            "args": ""
         }
     ]
 }
