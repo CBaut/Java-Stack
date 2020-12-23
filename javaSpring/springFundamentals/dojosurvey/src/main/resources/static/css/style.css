@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    width: fit-content;
+    margin: 50px auto 0 auto;
+    background-color: #cccccc;
+}
+h1 {
+    color: darkmagenta;
+    text-shadow: 2px 2px gold;
+    text-align: center;
+
+}
+.container {
+    border: 2px solid #222222;
+    padding: 20px;
+    display: block;
+    background-color: #fcfcfc;
+}
+button {
+    display: block;
+}
