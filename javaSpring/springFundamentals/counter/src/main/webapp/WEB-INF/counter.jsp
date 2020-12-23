@@ -7,7 +7,12 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Welcome User!</h1>
-    <c:out value="${count}" />
+    <p>
+      You have visited <a href="/">http://your_server</a>
+      <c:out value="${count}" /> times!
+    </p>
+    <p><a href="/">Test another visit?</a></p>
+    <p><a href="/count2">Count by 2</a></p>
+    <p><a href="/reset">Reset</a></p>
   </body>
 </html>
