@@ -20,16 +20,21 @@ public class HomeController {
             RedirectAttributes redirectAttributes) {
         session.setAttribute("code", code);
         if (code.equals("Bushido")) {
-            return "thecode.jsp";
+            session.setAttribute("success", true);
+            return "redirect:/thecode";
         } else {
             redirectAttributes.addFlashAttribute("error", "You must train harder!");
             return "redirect:/";
         }
     }
 
-    @RequestMapping("/createError")
-    public String flashMessages(RedirectAttributes redirectAttributes) {
-        redirectAttributes.addFlashAttribute("error", "A test error!");
-        return "redirect:/";
+    @RequestMapping("/thecode")
+    public String theCode(HttpSession session) {
+        Boolean success = (Boolean) session.getAttribute("success");
+        if (success) {
+            return "thecode.jsp";
+        } else {
+            return "redirect:/";
+        }
     }
 }
