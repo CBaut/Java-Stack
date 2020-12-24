@@ -4,21 +4,56 @@
     box-sizing: border-box;
 }
 body {
-    width: 970px;
+    width: 700px;
     margin: 30px auto 0 auto;
+    background-image: url("/img/11.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
     background-color: #666666;
+    opacity: 95%;
+}
+.gold {
+    margin-bottom: 20px;
+}
+h3.gold, h3.activities {
+    background-color: orange;
+    padding: 5px;
+    opacity: 80%;
+}
+.gold span {
+    color: gold;
+    text-shadow: 2px 2px #222222;
+    border: 2px solid #222222;
+    border-radius: 5px;
+    padding: 5px;
+    min-width: 60px;
+    opacity: 100%;
 }
 .forms {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
 }
-.form {
+.form, .activities {
     border: 2px solid #222222;
     border-radius: 5px;
-    width: 22%;
     padding: 10px;
+    background-color: #cccccc;
+}
+.form {
+    width: 22%;
     text-align: center;
-    background-color: #ffffff;
+}
+.form:hover {
+    opacity: 100%;
+    background-color: lightseagreen;
+}
+.form h5 {
+    color: darkslateblue;
+    margin: 5px;
+    vertical-align: middle;
+    min-height: 30px;
 }
 .form button {
     padding: 5px;
@@ -28,4 +63,26 @@ body {
     margin: 5px 0;
     color: darkolivegreen;
     text-shadow: 2px 2px goldenrod;
+}
+.form button:hover {
+    background-color: yellow;
+    color: black;
+}
+.activities {
+    height: 200px;
+    overflow-y: scroll;
+    opacity: 80%;
+}
+.red {
+    color: red;
+}
+.green {
+    color: green;
+}
+
+.reset button {
+    background-color: #cccccc;
+    color: #222222;
+    border: 1px solid black;
+    box-shadow: 2px 2px black;
 }
