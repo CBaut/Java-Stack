@@ -1,3 +1,5 @@
+// DOMAIN MODEL that corresponds to the Database
+// works with 
 package com.codingdojo.mvc.models;
 
 import java.util.Date;
@@ -14,6 +16,11 @@ import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+// Created using regular JavaBEAN format...
+// private attributes
+// public getters/setters
+// empty constructor
+// overload constructor
 @Entity
 @Table(name = "books")
 public class Book {
@@ -46,6 +53,46 @@ public class Book {
     }
 
     // other getters and setters removed for brevity
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public String getLanguage() {
+        return this.language;
+    }
+
+    public void setNumberOfPages(Integer numberOfPages) {
+        this.numberOfPages = numberOfPages;
+    }
+
+    public Integer getNumberOfPages() {
+        return this.numberOfPages;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();

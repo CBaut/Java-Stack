@@ -1,3 +1,5 @@
+// SERVICE LAYER that handles Controller /API requests and bounces with the Repository level to query from and store to database
+
 package com.codingdojo.mvc.services;
 
 import java.util.List;
@@ -34,5 +36,17 @@ public class BookService {
         } else {
             return null;
         }
+    }
+
+    // update a book
+    public Book updateBook(Book b) {
+        // something happens here
+        return bookRepository.save(b);
+    }
+
+    // deletes a book
+    public void deleteBook(Long id) {
+        // not sure what to put here...
+        bookRepository.deleteById(id);
     }
 }
