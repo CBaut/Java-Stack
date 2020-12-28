@@ -7,6 +7,7 @@
     <title>Title</title>
   </head>
   <body>
-    Yah
+    <h1>Yah</h1>
+    <a href="/books">Go to Books...</a>
   </body>
 </html>
