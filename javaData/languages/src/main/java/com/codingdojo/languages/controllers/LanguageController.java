@@ -29,21 +29,23 @@ public class LanguageController {
     // }
 
     @RequestMapping("/languages")
-    public String index(Model model) {
+    public String index(Model model, @ModelAttribute("language") Language language) {
         List<Language> languages = languageService.allLanguages();
         model.addAttribute("languages", languages);
         return "/languages/index.jsp";
     }
 
-    @RequestMapping("/languages/new")
-    public String newBook(@ModelAttribute("language") Language language) {
-        return "/languages/new.jsp";
-    }
+    // @RequestMapping("/languages/new")
+    // public String newBook(@ModelAttribute("language") Language language) {
+    // return "/languages/new.jsp";
+    // }
 
     @RequestMapping(value = "/languages", method = RequestMethod.POST)
-    public String create(@Valid @ModelAttribute("language") Language language, BindingResult result) {
+    public String create(@Valid @ModelAttribute("language") Language language, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "/languages/new.jsp";
+            List<Language> languages = languageService.allLanguages();
+            model.addAttribute("languages", languages);
+            return "/languages/index.jsp";
         } else {
             languageService.createLanguage(language);
             return "redirect:/languages";

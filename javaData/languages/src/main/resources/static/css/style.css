@@ -1,0 +1,14 @@
+# {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    width: 800px;
+    background-color: palegoldenrod;
+    margin: 40px auto 0 auto;
+}
+.actions {
+    display: flex;
+    vertical-align: middle;
+}

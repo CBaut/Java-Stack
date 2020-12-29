@@ -45,13 +45,22 @@ public class Language {
     public Language() {
     }
 
-    public Language(String name, String creator, String version) {
-        this.name = name;
-        this.creator = creator;
-        this.version = version;
+    // public Language(String name, String creator, String version) {
+    // this.name = name;
+    // this.creator = creator;
+    // this.version = version;
+    // }
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
     }
 
-    // other getters and setters removed for brevity
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = new Date();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -84,13 +93,19 @@ public class Language {
         return this.version;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        this.createdAt = new Date();
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedAt = new Date();
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
