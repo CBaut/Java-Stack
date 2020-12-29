@@ -24,14 +24,14 @@ public class SongController {
     }
 
     @RequestMapping("/dashboard")
-    public String index(Model model) {
+    public String index(Model model, @ModelAttribute("song") Song song) {
         List<Song> songs = songService.allSongs();
         model.addAttribute("songs", songs);
         return "/songs/dashboard.jsp";
     }
 
     @RequestMapping("/songs/new")
-    public String newBook(@ModelAttribute("song") Song song) {
+    public String newSong(@ModelAttribute("song") Song song) {
         return "/songs/new.jsp";
     }
 
@@ -43,7 +43,7 @@ public class SongController {
             return "/songs/index.jsp";
         } else {
             songService.createSong(song);
-            return "redirect:/songs";
+            return "redirect:/dashboard";
         }
     }
 
@@ -67,13 +67,13 @@ public class SongController {
             return "/songs/edit.jsp";
         } else {
             songService.updateSong(song);
-            return "redirect:/songs";
+            return "redirect:/dashboard";
         }
     }
 
     @RequestMapping(value = "/songs/{id}", method = RequestMethod.DELETE)
     public String destroy(@PathVariable("id") Long id) {
         songService.deleteSong(id);
-        return "redirect:/songs";
+        return "redirect:/dashboard";
     }
 }

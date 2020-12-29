@@ -15,5 +15,49 @@
     <link href="/css/style.css" rel="stylesheet" />
     <title>Lookify Dashboard</title>
   </head>
-  <body></body>
+  <body><h1>Welcome to the Language Dashboard</h1>
+    <div class="navlinks">
+        <a href="/songs/new">Add New</a>
+        <a href="#">Top Songs</a>
+        <form:form action="/songs" method="post" modelAttribute="song">
+      <form:label path="artist">Artist</form:label>
+      <form:errors path="artist" />
+      <form:input path="artist" />
+      <input type="submit" value="New Search" class="btn-outline-primary"/>
+    </form:form>
+    </div>
+    <table
+      class="table table-striped table-bordered table-hover table-condensed table-dark"
+    >
+      <thead>
+        <tr>
+          <th id="songTitle">Title</th>
+          <th id="songRating">Rating</th>
+          <th id="actions">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <c:forEach items="${songs}" var="song">
+          <tr>
+            <td>
+              <a href="/songs/${song.id}"
+                ><c:out value="${song.title}"
+              /></a>
+            </td>
+            <td>
+              <c:out value="${song.rating}" />
+            </td>
+
+            <td class="actions">
+              <form:form action="/songs/${song.id}" method="POST">
+		                            		<input type="hidden" name="_method" value="delete">
+		                            		<input class="btn btn-outline-danger" type="submit" value="Delete" />
+		                            	</form:form>
+		                            	<a href="/songs/${song.id}/edit" class="btn btn-outline-warning" role="button">Edit</a>
+            </td>
+          </tr>
+        </c:forEach>
+      </tbody>
+    </table>
+    </body>
 </html>

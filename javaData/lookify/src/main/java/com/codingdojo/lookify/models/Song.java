@@ -12,6 +12,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +33,7 @@ public class Song {
     @Size(min = 5, message = "Artist must be at least 5 characters")
     private String artist;
     @Max(10)
+    @NotNull(message = "Rating should be between 1 and 10")
     private Integer rating;
     // This will not allow the createdAt column to be updated after creation
     @Column(updatable = false)
