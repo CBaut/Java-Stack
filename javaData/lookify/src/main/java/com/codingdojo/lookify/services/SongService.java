@@ -49,4 +49,14 @@ public class SongService {
         // not sure what to put here...
         songRepository.deleteById(id);
     }
+
+    // Get all songs ordered by rating
+    public List<Song> findAllByRating() {
+        return songRepository.findAllByOrderByRatingDesc();
+    }
+
+    // Find all songs containing input artist
+    public List<Song> findArtist(String search) {
+        return songRepository.findByArtistContaining(search);
+    }
 }

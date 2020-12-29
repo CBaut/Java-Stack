@@ -17,6 +17,8 @@ public interface SongRepository extends CrudRepository<Song, Long> {
     // this method finds Languages with descriptions containing the search string
     List<Song> findByArtistContaining(String search);
 
+    List<Song> findAllByOrderByRatingDesc();
+
     // this method counts how many titles contain a certain string
     // Long countByNameContaining(String search);
 

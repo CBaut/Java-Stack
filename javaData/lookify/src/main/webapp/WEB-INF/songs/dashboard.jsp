@@ -18,13 +18,11 @@
   <body><h1>Welcome to Lookify</h1>
     <div class="navlinks">
         <a href="/songs/new">Add New</a>
-        <a href="#">Top Songs</a>
-        <form:form action="/songs" method="post" modelAttribute="song">
-      <form:label path="artist">Artist</form:label>
-      <form:errors path="artist" />
-      <form:input path="artist" />
-      <input type="submit" value="New Search" class="btn-outline-primary"/>
-    </form:form>
+        <a href="/search/topTen">Top Songs</a>
+        <form action="/search" method="post">
+      <input type="text" name="searchString" placeholder="Artist Name" />
+      <input type="submit" value="Search Artists" class="btn-outline-primary"/>
+    </form>
     </div>
     <table
       class="table table-striped table-bordered table-hover table-condensed table-dark"

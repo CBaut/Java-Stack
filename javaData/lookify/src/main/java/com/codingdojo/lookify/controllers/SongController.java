@@ -12,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class SongController {
@@ -23,10 +25,31 @@ public class SongController {
         this.songService = songService;
     }
 
+    @RequestMapping("/search/{searchString}")
+    public String search(@PathVariable("searchString") String search, Model model) {
+        List<Song> songs = songService.findArtist(search);
+        model.addAttribute("songs", songs);
+        model.addAttribute("search", search);
+        return "/search/search.jsp";
+    }
+
+    @PostMapping("/search")
+    public String searchQuery(@RequestParam(value = "searchString") String searchString) {
+        return "redirect:/search/" + searchString;
+    }
+
+    @RequestMapping("/search/topTen")
+    public String topTenPage(Model model) {
+        List<Song> songs = songService.findAllByRating();
+        model.addAttribute("songs", songs);
+        return "/search/topTen.jsp";
+    }
+
     @RequestMapping("/dashboard")
     public String index(Model model, @ModelAttribute("song") Song song) {
         List<Song> songs = songService.allSongs();
         model.addAttribute("songs", songs);
+        // model.addAttribute("search", search);
         return "/songs/dashboard.jsp";
     }
 
