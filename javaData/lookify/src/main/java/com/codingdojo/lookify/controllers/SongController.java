@@ -40,7 +40,7 @@ public class SongController {
         if (result.hasErrors()) {
             List<Song> songs = songService.allSongs();
             model.addAttribute("songs", songs);
-            return "/songs/index.jsp";
+            return "/songs/new.jsp";
         } else {
             songService.createSong(song);
             return "redirect:/dashboard";

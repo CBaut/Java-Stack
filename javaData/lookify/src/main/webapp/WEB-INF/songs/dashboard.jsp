@@ -15,7 +15,7 @@
     <link href="/css/style.css" rel="stylesheet" />
     <title>Lookify Dashboard</title>
   </head>
-  <body><h1>Welcome to the Language Dashboard</h1>
+  <body><h1>Welcome to Lookify</h1>
     <div class="navlinks">
         <a href="/songs/new">Add New</a>
         <a href="#">Top Songs</a>
@@ -32,7 +32,7 @@
       <thead>
         <tr>
           <th id="songTitle">Title</th>
-          <th id="songRating">Rating</th>
+          <th id="songRating">Rating (1-10)</th>
           <th id="actions">Actions</th>
         </tr>
       </thead>
