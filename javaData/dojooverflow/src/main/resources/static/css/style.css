@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 800px;
+    margin: 50px auto 0 auto;
+    text-align: center;
+    background-color: lightslategray;
+}
+.hero {
+    padding: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.navlinks, .actions {
+    display: flex;
+    justify-content: space-between;
+}
+.navlinks {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+.actions {
+    justify-content: center;
+}
+.navlinks a {
+    padding: 10px;
+    color: darkblue;
+}
+.navlinks a:hover {
+    color: goldenrod;
+    background-color: paleturquoise;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+.flex {
+    display: flex;
+    justify-content: space-around;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: goldenrod;
+    background-color: black;
+    border-radius: 5px;
+    transition: 0.2s;
+}
