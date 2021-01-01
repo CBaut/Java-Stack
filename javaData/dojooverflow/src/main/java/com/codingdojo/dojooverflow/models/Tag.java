@@ -15,7 +15,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -26,7 +25,6 @@ public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 1, max = 45)
     private String subject;
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")

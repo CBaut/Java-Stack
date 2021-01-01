@@ -22,7 +22,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     @Size(min = 1, max = 255)
     private String answer;
     @Column(updatable = false)
@@ -54,11 +54,11 @@ public class Answer {
     }
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        id = id;
     }
 
     public String getAnswer() {

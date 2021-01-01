@@ -38,9 +38,7 @@ public class HomeController {
     @RequestMapping("/questions")
     public String dashboard(Model model) {
         List<Question> questions = questionService.findAllQuestions();
-        List<Tag> tags = tagService.findAllTags();
         model.addAttribute("questions", questions);
-        model.addAttribute("tags", tags);
         return "/questions/dashboard.jsp";
     }
 
@@ -52,7 +50,7 @@ public class HomeController {
     @PostMapping("/questions/new")
     public String createQuestion(@Valid @ModelAttribute("newQuestion") NewQuestion newQuestion, BindingResult result) {
         if (result.hasErrors())
-            return "new.jsp";
+            return "/questions/new.jsp";
         this.questionService.createQuestion(newQuestion);
         return "redirect:/questions/";
     }

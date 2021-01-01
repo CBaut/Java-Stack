@@ -4,7 +4,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
 public class NewQuestion {
-    @NotBlank()
+
+    @NotBlank(message = "Write a question")
     private String question;
     @Pattern(regexp = "^(([a-zA-Z\\s])+$|([a-zA-Z\\s]+,)[a-zA-Z\\s]+){1,2}$", message = "Tags must be separated by commas, max 3")
     private String tags;

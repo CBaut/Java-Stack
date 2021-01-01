@@ -31,7 +31,7 @@
         <p>
           <form:label path="question">Question:</form:label>
           <form:errors path="question" />
-          <form:textarea rows="10" cols="30" path="question" class="form-control" />
+          <form:textarea rows="10" cols="30" path="question" name="question" class="form-control" />
         </p>
         <p>
           <form:label path="tags">Tags:</form:label>

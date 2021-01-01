@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -27,7 +26,6 @@ public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Size(min = 1, max = 255)
     private String question;
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -38,7 +36,7 @@ public class Question {
     // Many to Many Question and Tag
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "questions_tags", joinColumns = @JoinColumn(name = "question_id"), inverseJoinColumns = @JoinColumn(name = "tag_id"))
-    @Size(max = 3)
+    // @Size(max = 3)
     private List<Tag> tags;
 
     // One Question to Many Answer
@@ -49,9 +47,9 @@ public class Question {
 
     }
 
-    public Question(String question, List<Tag> tag) {
-        this.setQuestion(question);
-        this.setTags(tag);
+    public Question(String question, List<Tag> tags) {
+        this.question = question;
+        this.tags = tags;
     }
 
     public String tagString() {
