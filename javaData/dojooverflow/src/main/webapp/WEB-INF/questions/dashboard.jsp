@@ -17,15 +17,27 @@
   </head>
   <body>
     <h1>Questions Dashboard</h1>
-    <table>
+    <table
+      class="table table-striped table-bordered table-hover table-condensed table-dark"
+    >
       <thead>
-        <th>Question</th>
-        <th>Tags</th>
+        <th id="question">Question</th>
+        <th id="tags">Tags</th>
       </thead>
-      <tr>
-        <td>loop here</td>
-        <td>here too</td>
-      </tr>
+      <c:forEach items="${questions}" var="question">
+        <tr>
+          <td>
+            <a href="/questions/${question.id}"
+              ><c:out value="${question.question}"
+            /></a>
+          </td>
+          <td>
+            <c:forEach items="${question.tags}" var="tag">
+              <a href="/tags/${tag.id}"><c:out value="${tag.subject}" /></a>
+            </c:forEach>
+          </td>
+        </tr>
+      </c:forEach>
     </table>
     <div class="navlinks">
       <a href="/questions/new">New Question</a>
