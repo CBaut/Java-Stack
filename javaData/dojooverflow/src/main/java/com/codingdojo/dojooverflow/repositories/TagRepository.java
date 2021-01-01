@@ -14,7 +14,7 @@ public interface TagRepository extends CrudRepository<Tag, Long> {
 
     List<Tag> findAll();
 
-    List<Tag> findByQuestionsNotContains(Question question);
+    // List<Tag> findByQuestionsNotContains(Question question);
 
     Optional<Tag> findBySubject(String subject);
 }

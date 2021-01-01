@@ -53,14 +53,6 @@ public class Answer {
         this.setUpdatedAt(new Date());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        id = id;
-    }
-
     public String getAnswer() {
         return answer;
     }
