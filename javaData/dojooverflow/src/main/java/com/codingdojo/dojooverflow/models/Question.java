@@ -49,8 +49,17 @@ public class Question {
 
     }
 
-    public Question(String question) {
+    public Question(String question, List<Tag> tag) {
         this.setQuestion(question);
+        this.setTags(tag);
+    }
+
+    public String tagString() {
+        String tagString = "";
+        for (Tag tag : this.getTags()) {
+            tagString += tag.getSubject() + ", ";
+        }
+        return tagString;
     }
 
     @PrePersist

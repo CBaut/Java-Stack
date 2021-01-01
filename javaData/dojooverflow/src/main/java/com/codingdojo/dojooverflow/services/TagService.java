@@ -31,6 +31,19 @@ public class TagService {
         }
     }
 
+    // Check if tag exists
+    public Tag findBySubject(String subject) {
+        subject = subject.trim();
+        Optional<Tag> tag = tagRepository.findBySubject(subject);
+        if (tag.isPresent()) {
+            System.out.println("Found subject: " + subject);
+            return tag.get();
+        } else {
+            System.out.println("Subject not found: " + subject);
+            return null;
+        }
+    }
+
     // create a tag
     public Tag createTag(Tag t) {
         return tagRepository.save(t);

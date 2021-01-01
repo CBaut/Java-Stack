@@ -32,9 +32,7 @@
             /></a>
           </td>
           <td>
-            <c:forEach items="${question.tags}" var="tag">
-              <a href="/tags/${tag.id}"><c:out value="${tag.subject}" /></a>
-            </c:forEach>
+            <c:out value="${question.tagString()}" />
           </td>
         </tr>
       </c:forEach>

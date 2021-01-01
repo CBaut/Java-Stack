@@ -1,19 +1,25 @@
 package com.codingdojo.dojooverflow.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.codingdojo.dojooverflow.models.NewQuestion;
 import com.codingdojo.dojooverflow.models.Question;
+import com.codingdojo.dojooverflow.models.Tag;
 import com.codingdojo.dojooverflow.repositories.QuestionRepository;
+import com.codingdojo.dojooverflow.repositories.TagRepository;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
+    private final TagRepository tagRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    public QuestionService(QuestionRepository questionRepository, TagRepository tagRepository) {
         this.questionRepository = questionRepository;
+        this.tagRepository = tagRepository;
     }
 
     // returns all the questions
@@ -32,8 +38,20 @@ public class QuestionService {
     }
 
     // create a question
-    public Question createQuestion(Question q) {
-        return questionRepository.save(q);
+    public Question createQuestion(NewQuestion newQ) {
+        List<Tag> questionsTags = new ArrayList<>();
+        for (String subject : newQ.splitTags()) {
+            Tag tag = this.tagRepository.findBySubject(subject).orElse(null);
+            if (tag == null) {
+                tag = new Tag(subject);
+                this.tagRepository.save(tag);
+            }
+            // prevent dupe tags
+            if (!questionsTags.contains(tag))
+                questionsTags.add(tag);
+        }
+        Question newQuestion = new Question(newQ.getQuestion(), questionsTags);
+        return this.questionRepository.save(newQuestion);
     }
 
     // update a question
