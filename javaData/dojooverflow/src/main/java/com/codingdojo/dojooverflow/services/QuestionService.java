@@ -51,6 +51,7 @@ public class QuestionService {
                 questionsTags.add(tag);
         }
         Question newQuestion = new Question(newQ.getQuestion(), questionsTags);
+        System.out.println("made newQuestion: " + newQuestion.getQuestion() + newQuestion.getTags());
         return this.questionRepository.save(newQuestion);
     }
 

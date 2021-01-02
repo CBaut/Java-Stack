@@ -34,7 +34,7 @@ public class Tag {
 
     // Many to Many Tag to Question
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "questions_tags", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "question"))
+    @JoinTable(name = "questions_tags", joinColumns = @JoinColumn(name = "tag_id"), inverseJoinColumns = @JoinColumn(name = "question_id"))
     private List<Question> questions;
 
     public Tag() {
@@ -88,5 +88,13 @@ public class Tag {
 
     public void addQuestion(Question question) {
         this.questions.add(question);
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

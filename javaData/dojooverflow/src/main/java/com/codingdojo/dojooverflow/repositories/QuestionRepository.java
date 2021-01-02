@@ -13,5 +13,4 @@ public interface QuestionRepository extends CrudRepository<Question, Long> {
 
     List<Question> findAll();
 
-    // List<Question> findByTagsNotContains(Tag tag);
 }

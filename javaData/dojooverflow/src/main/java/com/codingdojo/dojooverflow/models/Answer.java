@@ -39,10 +39,6 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(String answer) {
-        this.setAnswer(answer);
-    }
-
     @PrePersist
     public void createdAt() {
         this.setCreatedAt(new Date());
@@ -83,6 +79,14 @@ public class Answer {
 
     public void setQuestion(Question question) {
         this.question = question;
+    }
+
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
 }

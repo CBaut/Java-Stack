@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.codingdojo.dojooverflow.models.Answer;
 import com.codingdojo.dojooverflow.models.NewQuestion;
 import com.codingdojo.dojooverflow.models.Question;
 import com.codingdojo.dojooverflow.models.Tag;
@@ -15,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
@@ -49,9 +52,38 @@ public class HomeController {
 
     @PostMapping("/questions/new")
     public String createQuestion(@Valid @ModelAttribute("newQuestion") NewQuestion newQuestion, BindingResult result) {
-        if (result.hasErrors())
+        System.out.println("Trying to create the question...");
+        System.out.println("Binding Result is: " + result);
+        if (result.hasErrors()) {
             return "/questions/new.jsp";
-        this.questionService.createQuestion(newQuestion);
-        return "redirect:/questions/";
+        } else {
+            System.out.println("Yup, going for it");
+            this.questionService.createQuestion(newQuestion);
+            System.out.println("Question created successfully");
+            return "redirect:/questions/";
+        }
+    }
+
+    @RequestMapping("/questions/{id}")
+    public String dashboard(@PathVariable("id") Long id, Model model, @ModelAttribute("answer") Answer answer) {
+        List<Question> questions = questionService.findAllQuestions();
+        model.addAttribute("questions", questions);
+        Question question = questionService.findQuestionById(id);
+        model.addAttribute("question", question);
+        return "/questions/show.jsp";
+    }
+
+    @PostMapping("/answers")
+    public String createAnswer(@Valid @ModelAttribute("answer") Answer answer, BindingResult result, Model model) {
+        System.out.println("Trying to create an answer now...");
+        if (result.hasErrors()) {
+            return "/questions/show.jsp";
+        } else {
+            System.out.println("Yup... going for the creation of the answer thing..");
+            // get question by id
+            Answer newAnswer = answerService.createAnswer(answer);
+            System.out.println("Answer has been created.");
+            return "redirect:/questions/" + newAnswer.getQuestion().getId();
+        }
     }
 }

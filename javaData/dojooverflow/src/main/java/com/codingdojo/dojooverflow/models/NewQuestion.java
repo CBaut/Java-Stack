@@ -10,8 +10,17 @@ public class NewQuestion {
     @Pattern(regexp = "^(([a-zA-Z\\s])+$|([a-zA-Z\\s]+,)[a-zA-Z\\s]+){1,2}$", message = "Tags must be separated by commas, max 3")
     private String tags;
 
+    public NewQuestion() {
+
+    }
+
+    public NewQuestion(String question, String tags) {
+        this.setQuestion(question);
+        this.setTags(tags);
+    }
+
     public String getQuestion() {
-        return question;
+        return this.question;
     }
 
     public void setQuestion(String question) {
@@ -19,7 +28,7 @@ public class NewQuestion {
     }
 
     public String getTags() {
-        return tags;
+        return this.tags;
     }
 
     public void setTags(String tags) {

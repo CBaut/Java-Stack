@@ -118,4 +118,12 @@ public class Question {
         this.answers = answers;
     }
 
+    public Long getId() {
+        return this.id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }
