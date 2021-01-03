@@ -33,7 +33,7 @@
           <h3>Answers:</h3>
           <ul class="form-group">
             <c:forEach items="${ question.answers }" var="answer">
-              <li class="form-control">${ answer.answer }</li>
+              <li class="form-control">${ answer.answerField }</li>
             </c:forEach>
           </ul>
         </div>
@@ -46,11 +46,11 @@
             class="form-inline"
           >
             <div class="form-group">
-              <form:errors path="answer" />
+              <form:errors path="answerField" />
               <form:textarea
                 class="form-control"
-                path="answer"
-                name="answer"
+                path="answerField"
+                name="answerField"
               ></form:textarea>
               <form:hidden path="question" value="${question.id}" />
             </div>

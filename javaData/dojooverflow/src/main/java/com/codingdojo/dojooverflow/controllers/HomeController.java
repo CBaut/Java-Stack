@@ -7,7 +7,6 @@ import javax.validation.Valid;
 import com.codingdojo.dojooverflow.models.Answer;
 import com.codingdojo.dojooverflow.models.NewQuestion;
 import com.codingdojo.dojooverflow.models.Question;
-import com.codingdojo.dojooverflow.models.Tag;
 import com.codingdojo.dojooverflow.services.AnswerService;
 import com.codingdojo.dojooverflow.services.QuestionService;
 import com.codingdojo.dojooverflow.services.TagService;
@@ -19,17 +18,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
     private final QuestionService questionService;
-    private final TagService tagService;
     private final AnswerService answerService;
 
     public HomeController(QuestionService questionService, TagService tagService, AnswerService answerService) {
         this.questionService = questionService;
-        this.tagService = tagService;
         this.answerService = answerService;
     }
 

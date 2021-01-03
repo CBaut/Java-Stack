@@ -24,7 +24,7 @@ public class Answer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Size(min = 1, max = 255)
-    private String answer;
+    private String answerField;
     @Column(updatable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
@@ -49,12 +49,12 @@ public class Answer {
         this.setUpdatedAt(new Date());
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getAnswerField() {
+        return answerField;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setAnswerField(String answer) {
+        this.answerField = answer;
     }
 
     public Date getCreatedAt() {
