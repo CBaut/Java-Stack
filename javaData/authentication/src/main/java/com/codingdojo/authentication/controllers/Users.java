@@ -55,8 +55,8 @@ public class Users {
     public String loginUser(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, Model model,
             HttpSession session) {
         // [x] if the user is authenticated, save their user id in session
-        if (userService.authenticateUser(userLogin.loginEmail, loginPasword)) {
-            User thisUser = userService.findByEmail(loginEmail);
+        if (userService.authenticateUser(userLogin.getLoginEmail(), userLogin.getLoginPassword())) {
+            User thisUser = userService.findByEmail(userLogin.getLoginEmail());
             session.setAttribute("uuid", thisUser.getId());
             System.out.println("User ID saved to session as: " + thisUser.getId());
         }
