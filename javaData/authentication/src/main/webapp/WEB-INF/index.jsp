@@ -18,7 +18,8 @@
   <body>
     <h1>Welcome to Authentication</h1>
     <div class="navlinks">
-      <a href="/questions">Enter</a>
+      <a href="/registration">Register Here</a>
+      <a href="/login">Login Here</a>
     </div>
   </body>
 </html>
