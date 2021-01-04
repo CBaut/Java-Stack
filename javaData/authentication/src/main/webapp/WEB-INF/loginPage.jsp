@@ -19,26 +19,34 @@ uri="http://java.sun.com/jsp/jstl/core" %>
   <body>
     <h1>Login</h1>
     <p><c:out value="${error}" /></p>
-    <form method="post" action="/login" class="form-inline col-md-6">
-      <p>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" class="form-control" />
-      </p>
-      <p>
-        <label for="password">Password</label>
+    <form:form
+      method="post"
+      action="/login"
+      modelAttribute="userLogin"
+      class="form-inline col-md-6"
+    >
+      <div class="form-group">
+        <p>
+          <form:label path="loginEmail">Email</form:label>
+          <form:input type="email" path="loginEmail" class="form-control" />
+        </p>
+        <p>
+          <form:label path="loginPassword">Password</form:label>
+          <form:input
+            type="password"
+            path="loginPassword"
+            id="loginPassword"
+            name="loginPassword"
+            class="form-control"
+          />
+        </p>
         <input
-          type="password"
-          id="password"
-          name="password"
-          class="form-control"
+          type="submit"
+          value="Login!"
+          class="btn btn-block btn-outline-primary"
         />
-      </p>
-      <input
-        type="submit"
-        value="Login!"
-        class="btn btn-block btn-outline-primary"
-      />
-    </form>
+      </div>
+    </form:form>
     <div class="navlinks">
       <a href="/registration">Not a member? Register here!</a>
     </div>

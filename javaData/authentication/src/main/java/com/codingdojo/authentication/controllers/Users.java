@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.codingdojo.authentication.models.User;
+import com.codingdojo.authentication.models.UserLogin;
 import com.codingdojo.authentication.services.UserService;
 
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,7 @@ public class Users {
     }
 
     @RequestMapping("/login")
-    public String login() {
+    public String login(@ModelAttribute("userLogin") UserLogin userLogin) {
         return "loginPage.jsp";
     }
 
@@ -51,11 +52,11 @@ public class Users {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam("email") String email, @RequestParam("password") String password, Model model,
+    public String loginUser(@Valid @ModelAttribute("userLogin") UserLogin userLogin, BindingResult result, Model model,
             HttpSession session) {
         // [x] if the user is authenticated, save their user id in session
-        if (userService.authenticateUser(email, password)) {
-            User thisUser = userService.findByEmail(email);
+        if (userService.authenticateUser(userLogin.loginEmail, loginPasword)) {
+            User thisUser = userService.findByEmail(loginEmail);
             session.setAttribute("uuid", thisUser.getId());
             System.out.println("User ID saved to session as: " + thisUser.getId());
         }
