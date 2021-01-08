@@ -45,6 +45,16 @@
             "mainClass": "com.codingdojo.demo.demo.DemoApplication",
             "projectName": "demo",
             "args": ""
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-EventsApplication<events>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.codingdojo.events.EventsApplication",
+            "projectName": "events",
+            "args": ""
         }
     ]
 }
