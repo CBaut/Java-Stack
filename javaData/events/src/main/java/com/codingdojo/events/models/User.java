@@ -21,6 +21,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -42,7 +44,9 @@ public class User {
     @Transient
     private String passwordConfirmation;
     @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
     // One User can make Many Comments on One Event
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -163,6 +167,14 @@ public class User {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
 }

@@ -15,6 +15,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "comments")
 public class Comment {
@@ -24,7 +26,9 @@ public class Comment {
     @Size(min = 5, max = 255, message = "Comment at least 5 characters. 255 characters max.")
     private String body;
     @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
 
     // Many Comments for One User

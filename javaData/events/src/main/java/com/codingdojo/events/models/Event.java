@@ -18,7 +18,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "events")
@@ -28,12 +31,17 @@ public class Event {
     private Long id;
     @Size(min = 5, message = "Name of event must be at least 5 characters")
     private String name;
-    @NotEmpty(message = "Date of Event is required")
+    @NotNull(message = "Date of Event is required")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date date;
     @NotEmpty(message = "Location of Event is required")
     private String location;
+    @NotEmpty(message = "State is Required")
+    private String state;
     @Column(updatable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createdAt;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date updatedAt;
     // Many Events hosted by One User
     @ManyToOne(fetch = FetchType.LAZY)
@@ -131,5 +139,13 @@ public class Event {
 
     public void setHost(User host) {
         this.host = host;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

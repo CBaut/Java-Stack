@@ -1,6 +1,7 @@
 package com.codingdojo.events.validator;
 
 import com.codingdojo.events.models.User;
+import com.codingdojo.events.services.UserService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -8,6 +9,12 @@ import org.springframework.validation.Validator;
 
 @Component
 public class UserValidator implements Validator {
+    private final UserService userService;
+
+    public UserValidator(UserService userService) {
+        this.userService = userService;
+    }
+
     // 1
     @Override
     public boolean supports(Class<?> c) {
@@ -22,6 +29,10 @@ public class UserValidator implements Validator {
         if (!user.getPasswordConfirmation().equals(user.getPassword())) {
             // 3
             errors.rejectValue("passwordConfirmation", "Match");
+        }
+        User foundUser = userService.findByEmail(user.getEmail());
+        if (foundUser != null) {
+            errors.rejectValue("email", "Match");
         }
     }
 
