@@ -33,7 +33,7 @@ uri="http://www.springframework.org/tags/form" %>
         <th id="host">Host</th>
         <th id="status">Action/Status</th>
       </thead>
-      <c:forEach items="${events}" var="event">
+      <c:forEach items="${eventsInState}" var="event">
         <tr>
           <td>
             <a href="/events/${event.id}"><c:out value="${event.name}" /></a>
@@ -45,9 +45,23 @@ uri="http://www.springframework.org/tags/form" %>
             <c:out value="${event.location}" />
           </td>
           <td>
-            <c:out value="${event.host}" />
+            <c:out value="${event.host.firstName}" />
+            <c:out value="${event.host.lastName}" />
           </td>
-          <td>stuff here to loop for</td>
+          <c:choose>
+            <c:when test="${ event.host.id == user.id }">
+              <td>
+                <a href="/events/${event.id}/edit">EDIT</a> |
+                <a href="#">DELETE</a>
+              </td>
+            </c:when>
+            <c:when test="${event.users.contains(user) }">
+              <td>Joining<a href="#"> CANCEL</a></td>
+            </c:when>
+            <c:otherwise>
+              <td><a href="#">Join</a></td>
+            </c:otherwise>
+          </c:choose>
         </tr>
       </c:forEach>
     </table>
@@ -59,10 +73,11 @@ uri="http://www.springframework.org/tags/form" %>
         <th id="name">Name</th>
         <th id="date">Date</th>
         <th id="location">Location</th>
+        <th id="state">State</th>
         <th id="host">Host</th>
-        <th id="status">Action/Status</th>
+        <th id="status">Action</th>
       </thead>
-      <c:forEach items="${events}" var="event">
+      <c:forEach items="${eventsNotInState}" var="event">
         <tr>
           <td>
             <a href="/events/${event.id}"><c:out value="${event.name}" /></a>
@@ -74,52 +89,62 @@ uri="http://www.springframework.org/tags/form" %>
             <c:out value="${event.location}" />
           </td>
           <td>
-            <c:out value="${event.host}" />
+            <c:out value="${event.state}" />
+          </td>
+          <td>
+            <c:out value="${event.host.firstName}" />
+            <c:out value="${event.host.lastName}" />
           </td>
           <td>stuff here to loop for</td>
         </tr>
       </c:forEach>
     </table>
-    <h3>Create an Event</h3>
-    <form:form
-      method="POST"
-      action="/events"
-      modelAttribute="newEvent"
-      class="form-inline"
-    >
-      <div class="form-group">
-        <p>
-          <form:label path="name">Name:</form:label>
-          <form:errors path="name" class="errors" />
-          <form:input type="text" path="name" class="form-control" />
-        </p>
-        <p>
-          <form:label path="date">Date:</form:label>
-          <form:errors path="date" class="errors" />
-          <form:input type="datetime-local" path="date" class="form-control" />
-        </p>
-        <p>
-          <form:label path="location">Location:</form:label>
-          <form:errors path="location" class="errors" />
-          <form:input type="text" path="location" class="form-control" />
-        </p>
-        <p>
-          <form:label path="state">State</form:label>
-          <form:errors path="state" class="errors" />
-          <form:select path="state" name="state" class="form-control">
-            <c:forEach items="${states}" var="state">
-              <form:option value="${state}"
-                ><c:out value="${state}"></c:out
-              ></form:option>
-            </c:forEach>
-          </form:select>
-        </p>
-        <input
-          type="submit"
-          value="Register!"
-          class="btn btn-outline-primary btn-block"
-        />
-      </div>
-    </form:form>
+    <div class="col-md-6">
+      <h3>Create an Event</h3>
+      <form:form
+        method="POST"
+        action="/events"
+        modelAttribute="newEvent"
+        class="form-inline"
+      >
+        <div class="form-group">
+          <p>
+            <form:label path="name">Name:</form:label>
+            <form:errors path="name" class="errors" />
+            <form:input type="text" path="name" class="form-control" />
+          </p>
+          <p>
+            <form:label path="date">Date:</form:label>
+            <form:errors path="date" class="errors" />
+            <form:input
+              type="datetime-local"
+              path="date"
+              class="form-control"
+            />
+          </p>
+          <p>
+            <form:label path="location">Location:</form:label>
+            <form:errors path="location" class="errors" />
+            <form:input type="text" path="location" class="form-control" />
+          </p>
+          <p>
+            <form:label path="state">State</form:label>
+            <form:errors path="state" class="errors" />
+            <form:select path="state" name="state" class="form-control">
+              <c:forEach items="${states}" var="state">
+                <form:option value="${state}"
+                  ><c:out value="${state}"></c:out
+                ></form:option>
+              </c:forEach>
+            </form:select>
+          </p>
+          <input
+            type="submit"
+            value="Create"
+            class="btn btn-outline-primary btn-block"
+          />
+        </div>
+      </form:form>
+    </div>
   </body>
 </html>

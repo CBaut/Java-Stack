@@ -1,5 +1,7 @@
 package com.codingdojo.events.models;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -91,6 +93,11 @@ public class Event {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public String getDateString() {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        return dateFormat.format(this.getDate());
     }
 
     public String getLocation() {

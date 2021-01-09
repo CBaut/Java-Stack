@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.codingdojo.events.models.User;
+import com.codingdojo.events.models.Comment;
 import com.codingdojo.events.models.Event;
 import com.codingdojo.events.models.State;
 import com.codingdojo.events.services.EventService;
@@ -16,7 +17,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -97,12 +100,15 @@ public class HomeController {
             return "redirect:/";
         }
         // get user from session
-        // query all events
         User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
-        List<Event> allEvents = eventService.findAllEvents();
+        // query all events in state of user
+        List<Event> allEventsInState = eventService.findEventByState(thisUser.getState());
+        // query all events not in user state
+        List<Event> allEventsNotInState = eventService.findEventByStateNot(thisUser.getState());
         model.addAttribute("user", thisUser);
         model.addAttribute("states", State.states);
-        model.addAttribute("events", allEvents);
+        model.addAttribute("eventsInState", allEventsInState);
+        model.addAttribute("eventsNotInState", allEventsNotInState);
         return "/events/dashboard.jsp";
     }
 
@@ -116,10 +122,47 @@ public class HomeController {
             model.addAttribute("states", State.states);
             return "/events/dashboard.jsp";
         }
+        // set session user as host
+        User user = userService.findUserById((Long) session.getAttribute("uuid"));
+        event.setHost(user);
+        System.out.println("Applying current User as Host...");
         System.out.println("going for the creation of Event");
         this.eventService.createEvent(event);
         System.out.println("new event was successfully created");
         return "redirect:/events";
+    }
+
+    // edit event page
+    @RequestMapping("/events/{id}/edit")
+    public String editEvent(@PathVariable(value = "id") Long eventId, @ModelAttribute("updateEvent") Event event,
+            HttpSession session, Model model) {
+        if (session.getAttribute("uuid") == null) {
+            return "redirect:/";
+        }
+        User user = userService.findUserById((Long) session.getAttribute("uuid"));
+        model.addAttribute("user", user);
+        // edit form needs prefilled event info
+        Event thisEvent = eventService.findEventById(eventId);
+        model.addAttribute("states", State.states);
+        model.addAttribute("event", thisEvent);
+        return "/events/edit.jsp";
+    }
+
+    @PutMapping("/events/{id}/edit")
+    public String updateEvent(@PathVariable(value = "id") Long eventId, @ModelAttribute("updateEvent") Event event,
+            BindingResult result, HttpSession session, Model model) {
+        System.out.println("made it to the PutMapping method to edit the event...");
+        return "/events/info.jsp";
+    }
+
+    // show event details including Message Wall feature
+    @RequestMapping("/events/{id}")
+    public String showEvent(@PathVariable(value = "id") Long eventId, HttpSession session, Model model,
+            @ModelAttribute("comments") Comment comment) {
+        if (session.getAttribute("uuid") == null) {
+            return "redirect:/";
+        }
+        return "/events/info.jsp";
     }
 
     @RequestMapping("/logout")

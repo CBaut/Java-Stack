@@ -35,6 +35,16 @@ public class EventService {
         }
     }
 
+    // retrieve an event by state field
+    public List<Event> findEventByState(String state) {
+        return eventRepository.findByState(state);
+    }
+
+    // retrieves a list of events by !state field
+    public List<Event> findEventByStateNot(String state) {
+        return eventRepository.findByStateNot(state);
+    }
+
     // create an event
     public Event createEvent(Event event) {
         return this.eventRepository.save(event);
