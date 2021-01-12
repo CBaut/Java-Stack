@@ -173,6 +173,16 @@ public class HomeController {
         return "/events/info.jsp";
     }
 
+    @RequestMapping("/events/{id}/join")
+    public String joinEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
+        System.out.println("Activating join function...");
+        User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
+        Event thisEvent = eventService.findEventById(eventId);
+        eventService.addUserToEvent(thisUser, thisEvent);
+        System.out.println("added user to this event... now redirecting back to dashboard");
+        return "redirect:/events";
+    }
+
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
         System.out.println("Activating deletion of event...");

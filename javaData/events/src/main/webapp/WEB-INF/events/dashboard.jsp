@@ -62,7 +62,7 @@ uri="http://www.springframework.org/tags/form" %>
               <td>Joining<a href="#"> CANCEL</a></td>
             </c:when>
             <c:otherwise>
-              <td><a href="#">Join</a></td>
+              <td><a href="/events/${event.id}/join">Join</a></td>
             </c:otherwise>
           </c:choose>
         </tr>

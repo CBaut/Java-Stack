@@ -132,6 +132,10 @@ public class Event {
         this.users = users;
     }
 
+    public void addUser(User user) {
+        this.users.add(user);
+    }
+
     public List<Comment> getComments() {
         return comments;
     }

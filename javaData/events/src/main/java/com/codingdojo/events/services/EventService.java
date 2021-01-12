@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.codingdojo.events.models.Event;
+import com.codingdojo.events.models.User;
 import com.codingdojo.events.models.Comment;
 import com.codingdojo.events.repositories.CommentRepository;
 import com.codingdojo.events.repositories.EventRepository;
@@ -59,6 +60,14 @@ public class EventService {
         thisEvent.setState(event.getState());
         return eventRepository.save(thisEvent);
     }
+
+    // add user to an event
+    public Event addUserToEvent(User user, Event event) {
+        event.addUser(user);
+        return eventRepository.save(event);
+    }
+
+    // remove user from an event
 
     // deletes an event
     public void deleteEvent(Long id) {

@@ -161,6 +161,10 @@ public class User {
         this.events = events;
     }
 
+    public void addEvent(Event event) {
+        this.events.add(event);
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
