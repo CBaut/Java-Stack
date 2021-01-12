@@ -148,10 +148,17 @@ public class HomeController {
         return "/events/edit.jsp";
     }
 
-    @PutMapping("/events/{id}/edit")
+    @PostMapping("/events/{id}/edit")
     public String updateEvent(@PathVariable(value = "id") Long eventId, @ModelAttribute("updateEvent") Event event,
             BindingResult result, HttpSession session, Model model) {
-        System.out.println("made it to the PutMapping method to edit the event...");
+        if (result.hasErrors()) {
+            System.out.println("found some errors... rendering edit.jsp with error messages");
+            model.addAttribute("states", State.states);
+            return "/events/edit.jsp";
+        }
+        System.out.println("made it to the PostMapping method to edit the event...");
+        eventService.updateEvent(eventId, event);
+        System.out.println("Event Service performing the updates....");
         return "/events/info.jsp";
     }
 

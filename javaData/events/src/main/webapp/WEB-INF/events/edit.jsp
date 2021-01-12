@@ -26,7 +26,7 @@ uri="http://www.springframework.org/tags/form" %>
     <div class="col-md-6">
       <h3>Edit Event</h3>
       <form:form
-        method="POST"
+        method="post"
         action="/events/${event.id}/edit"
         modelAttribute="updateEvent"
         class="form-inline"
@@ -66,7 +66,7 @@ uri="http://www.springframework.org/tags/form" %>
           </p>
           <input
             type="submit"
-            value="Create"
+            value="Edit"
             class="btn btn-outline-primary btn-block"
           />
         </div>

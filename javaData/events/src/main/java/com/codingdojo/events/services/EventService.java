@@ -51,8 +51,13 @@ public class EventService {
     }
 
     // update an event
-    public Event updateEvent(Event event) {
-        return eventRepository.save(event);
+    public Event updateEvent(Long id, Event event) {
+        Event thisEvent = findEventById(id);
+        thisEvent.setName(event.getName());
+        thisEvent.setDate(event.getDate());
+        thisEvent.setLocation(event.getLocation());
+        thisEvent.setState(event.getState());
+        return eventRepository.save(thisEvent);
     }
 
     // deletes an event
