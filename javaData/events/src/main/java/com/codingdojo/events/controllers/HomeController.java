@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -170,6 +171,14 @@ public class HomeController {
             return "redirect:/";
         }
         return "/events/info.jsp";
+    }
+
+    @PostMapping("/events/{id}/delete")
+    public String deleteEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
+        System.out.println("Activating deletion of event...");
+        eventService.deleteEvent(eventId);
+        System.out.println("Event has been successfuly deleted");
+        return "redirect:/events";
     }
 
     @RequestMapping("/logout")

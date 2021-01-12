@@ -51,8 +51,11 @@ uri="http://www.springframework.org/tags/form" %>
           <c:choose>
             <c:when test="${ event.host.id == user.id }">
               <td>
-                <a href="/events/${event.id}/edit">EDIT</a> |
-                <a href="#">DELETE</a>
+                <a href="/events/${event.id}/edit" class="btn btn-outline-success">EDIT</a> |
+                <form:form action="/events/${event.id}/delete" method="post">
+		                            		<input type="hidden" name="_method" value="delete">
+		                            		<input class="btn btn-outline-danger" type="submit" value="Delete" />
+		                            	</form:form>
               </td>
             </c:when>
             <c:when test="${event.users.contains(user) }">
