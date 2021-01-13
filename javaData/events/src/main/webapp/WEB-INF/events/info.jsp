@@ -26,15 +26,20 @@ uri="http://www.springframework.org/tags/form" %>
     <div class="row">
       <div clas="col-md-6">
         <p class="lead">Host: <c:out value="${event.host.firstName}" /> <c:out value="${event.host.lastName}" /></p>
+        <p class="lead">Date: <c:out value="${event.getDateString()}" /></p>
+        <p class="lead">Location: <c:out value="${event.location}" /> <c:out value="${event.state}" /></p>
+        <p class="lead">People who are attending this event: <c:out value="${event.users.size()}" /></p>
         <table class="table table-striped table-bordered table-hover table-condensed table-dark">
           <thead>
             <th id="name">Name</th>
             <th id="location">Location</th>
           </thead>
-          <tr>
-            <td>{Place Holder}</td>
-            <td>{Place Holder}</td>
-          </tr>
+          <c:forEach items="${event.users}" var="user">
+            <tr>
+              <td><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></td>
+              <td><c:out value="${user.location}" /></td>
+            </tr>
+          </c:forEach>
         </table>
       </div>
       <div class="col-md-6">

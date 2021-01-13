@@ -148,6 +148,14 @@ public class Event {
         this.comments = comments;
     }
 
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
+    }
+
+    public void removeComment(Comment comment) {
+        this.comments.remove(comment);
+    }
+
     public User getHost() {
         return host;
     }

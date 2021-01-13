@@ -161,13 +161,18 @@ public class HomeController {
         System.out.println("ran validations and now evaluating if errors...");
         if (result.hasErrors()) {
             System.out.println("found some errors... rendering edit.jsp with error messages");
+            User user = userService.findUserById((Long) session.getAttribute("uuid"));
+            model.addAttribute("user", user);
+            // edit form needs prefilled event info
+            Event thisEvent = eventService.findEventById(eventId);
             model.addAttribute("states", State.states);
+            model.addAttribute("event", thisEvent);
             return "/events/edit.jsp";
         }
         System.out.println("made it to the PostMapping method to edit the event...");
         eventService.updateEvent(eventId, event);
         System.out.println("Event Service performing the updates....");
-        return "/events/info.jsp";
+        return "redirect:/events/" + event.getId();
     }
 
     // show event details including Message Wall feature
@@ -184,7 +189,21 @@ public class HomeController {
         return "/events/info.jsp";
     }
 
-    //
+    // create comment by user and add to event
+    @PostMapping("/events/{id}/addcomment")
+    public String addComment(@PathVariable(value = "id") Long eventId, HttpSession session, Model model,
+            @Valid @ModelAttribute("comments") Comment comment, BindingResult result) {
+        if (result.hasErrors()) {
+            System.out.println("found some errors... rendering info.jsp with error messages");
+            User user = userService.findUserById((Long) session.getAttribute("uuid"));
+            model.addAttribute("user", user);
+            Event thisEvent = eventService.findEventById(eventId);
+            model.addAttribute("event", thisEvent);
+            return "/events/info.jsp";
+        }
+        System.out.println("made it here to create comment!");
+        return "redirect:/events/" + eventId;
+    }
 
     @RequestMapping("/events/{id}/join")
     public String joinEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
