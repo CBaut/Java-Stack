@@ -170,6 +170,10 @@ public class HomeController {
         if (session.getAttribute("uuid") == null) {
             return "redirect:/";
         }
+        User user = userService.findUserById((Long) session.getAttribute("uuid"));
+        model.addAttribute("user", user);
+        Event thisEvent = eventService.findEventById(eventId);
+        model.addAttribute("event", thisEvent);
         return "/events/info.jsp";
     }
 
