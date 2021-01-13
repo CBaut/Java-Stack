@@ -11,6 +11,7 @@ import com.codingdojo.events.models.Event;
 import com.codingdojo.events.models.State;
 import com.codingdojo.events.services.EventService;
 import com.codingdojo.events.services.UserService;
+import com.codingdojo.events.validator.EventValidator;
 import com.codingdojo.events.validator.UserValidator;
 
 import org.springframework.stereotype.Controller;
@@ -19,9 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -30,11 +29,14 @@ public class HomeController {
     private final UserService userService;
     private final UserValidator userValidator;
     private final EventService eventService;
+    private final EventValidator eventValidator;
 
-    public HomeController(UserService userService, UserValidator userValidator, EventService eventService) {
+    public HomeController(UserService userService, UserValidator userValidator, EventService eventService,
+            EventValidator eventValidator) {
         this.userService = userService;
         this.eventService = eventService;
         this.userValidator = userValidator;
+        this.eventValidator = eventValidator;
     }
 
     // index at / is the registration and login page
@@ -118,6 +120,8 @@ public class HomeController {
     public String newEvent(@Valid @ModelAttribute("newEvent") Event event, BindingResult result, HttpSession session,
             Model model) {
         System.out.println("Trying to create a new event... made it to the Post Form function!");
+        eventValidator.validate(event, result);
+        System.out.println("ran validations and now evaluating if errors...");
         if (result.hasErrors()) {
             System.out.println("found some errors... rendering dashboard.jsp with error messages");
             model.addAttribute("states", State.states);
@@ -152,6 +156,9 @@ public class HomeController {
     @PostMapping("/events/{id}/edit")
     public String updateEvent(@PathVariable(value = "id") Long eventId, @ModelAttribute("updateEvent") Event event,
             BindingResult result, HttpSession session, Model model) {
+        System.out.println("Trying to edit event... made it to the Post Form function!");
+        eventValidator.validate(event, result);
+        System.out.println("ran validations and now evaluating if errors...");
         if (result.hasErrors()) {
             System.out.println("found some errors... rendering edit.jsp with error messages");
             model.addAttribute("states", State.states);
@@ -176,6 +183,8 @@ public class HomeController {
         model.addAttribute("event", thisEvent);
         return "/events/info.jsp";
     }
+
+    //
 
     @RequestMapping("/events/{id}/join")
     public String joinEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {

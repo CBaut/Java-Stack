@@ -35,7 +35,7 @@ public class Event {
     private String name;
     @NotNull(message = "Date of Event is required")
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private Date date;
+    private Date date = new Date();
     @NotEmpty(message = "Location of Event is required")
     private String location;
     @NotEmpty(message = "State is Required")

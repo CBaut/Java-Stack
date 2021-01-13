@@ -26,7 +26,7 @@ uri="http://www.springframework.org/tags/form" %>
     <div class="row">
       <div clas="col-md-6">
         <p class="lead">Host: <c:out value="${event.host.firstName}" /> <c:out value="${event.host.lastName}" /></p>
-        <table>
+        <table class="table table-striped table-bordered table-hover table-condensed table-dark">
           <thead>
             <th id="name">Name</th>
             <th id="location">Location</th>
