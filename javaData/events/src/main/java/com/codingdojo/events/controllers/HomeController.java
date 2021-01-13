@@ -183,6 +183,16 @@ public class HomeController {
         return "redirect:/events";
     }
 
+    @RequestMapping("/events/{id}/unjoin")
+    public String unJoinEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
+        System.out.println("Activating unjoin function...");
+        User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
+        Event thisEvent = eventService.findEventById(eventId);
+        eventService.removeUserFromEvent(thisUser, thisEvent);
+        System.out.println("removed user from this event... now redirecting back to dashboard");
+        return "redirect:/events";
+    }
+
     @PostMapping("/events/{id}/delete")
     public String deleteEvent(@PathVariable(value = "id") Long eventId, HttpSession session) {
         System.out.println("Activating deletion of event...");

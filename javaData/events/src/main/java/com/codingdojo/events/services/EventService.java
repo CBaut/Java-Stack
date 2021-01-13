@@ -68,6 +68,10 @@ public class EventService {
     }
 
     // remove user from an event
+    public Event removeUserFromEvent(User user, Event event) {
+        event.removeUser(user);
+        return eventRepository.save(event);
+    }
 
     // deletes an event
     public void deleteEvent(Long id) {

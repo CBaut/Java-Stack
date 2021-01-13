@@ -59,7 +59,7 @@ uri="http://www.springframework.org/tags/form" %>
               </td>
             </c:when>
             <c:when test="${event.users.contains(user) }">
-              <td>Joining<a href="#"> CANCEL</a></td>
+              <td>Joining<a href="/events/${event.id}/unjoin"> CANCEL</a></td>
             </c:when>
             <c:otherwise>
               <td><a href="/events/${event.id}/join">Join</a></td>
@@ -98,7 +98,24 @@ uri="http://www.springframework.org/tags/form" %>
             <c:out value="${event.host.firstName}" />
             <c:out value="${event.host.lastName}" />
           </td>
-          <td>stuff here to loop for</td>
+          <c:choose>
+            <c:when test="${ event.host.id == user.id }">
+              <td>
+                <a href="/events/${event.id}/edit" class="btn btn-outline-success">EDIT</a> |
+                <form:form action="/events/${event.id}/delete" method="post">
+		                            		<input type="hidden" name="_method" value="delete">
+		                            		<input class="btn btn-outline-danger" type="submit" value="Delete" />
+		                            	</form:form>
+              </td>
+            </c:when>
+            <c:when test="${event.users.contains(user) }">
+              <td>Joining<a href="/events/${event.id}/unjoin"> CANCEL</a></td>
+            </c:when>
+            <c:otherwise>
+              <td><a href="/events/${event.id}/join">Join</a></td>
+            </c:otherwise>
+
+          </c:choose>
         </tr>
       </c:forEach>
     </table>

@@ -136,6 +136,10 @@ public class Event {
         this.users.add(user);
     }
 
+    public void removeUser(User user) {
+        this.users.remove(user);
+    }
+
     public List<Comment> getComments() {
         return comments;
     }
