@@ -15,10 +15,12 @@ import org.springframework.stereotype.Service;
 public class EventService {
     private final EventRepository eventRepository;
     private final CommentRepository commentRepository;
+    private final UserService userService;
 
-    public EventService(EventRepository eventRepository, CommentRepository commentRepository) {
+    public EventService(EventRepository eventRepository, CommentRepository commentRepository, UserService userService) {
         this.eventRepository = eventRepository;
         this.commentRepository = commentRepository;
+        this.userService = userService;
     }
 
     // returns all the events
@@ -95,15 +97,22 @@ public class EventService {
 
     // create a comment
     public Comment createComment(Comment comment, Event event, User user) {
+        return this.commentRepository.save(new Comment(comment.getBody(), event, user));
+    }
+
+    // public void comment(EventUser user, Event event, String comment) {
+    // this.mRepo.save(new Message(user, event, comment));
+    // }
+
+    // update a comment
+    public Comment updateComment(Comment comment, Long eventId, Long userId) {
+        Event event = findEventById(eventId);
+        System.out.println("Event is: " + event);
+        User user = userService.findUserById(userId);
         comment.setUser(user);
         comment.setEvent(event);
         event.addComment(comment);
         this.eventRepository.save(event);
-        return this.commentRepository.save(comment);
-    }
-
-    // update a comment
-    public Comment updateComment(Comment comment) {
         return commentRepository.save(comment);
     }
 

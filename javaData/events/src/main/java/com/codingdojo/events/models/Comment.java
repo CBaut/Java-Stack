@@ -44,6 +44,12 @@ public class Comment {
 
     }
 
+    public Comment(String body, Event event, User user) {
+        this.body = body;
+        this.user = user;
+        this.event = event;
+    }
+
     @PrePersist
     protected void onCreate() {
         this.createdAt = new Date();

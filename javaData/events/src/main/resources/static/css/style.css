@@ -5,7 +5,7 @@
 }
 
 body {
-    width: 800px;
+    width: 850px;
     margin: 50px auto 0 auto;
     text-align: center;
     background-color: lightslategray;
@@ -58,4 +58,18 @@ a:hover {
 }
 .errors {
     color: red;
+}
+
+.messages {
+    border: 0.75px solid black;
+    text-align: left;
+    padding: 10px;
+    margin: 5px;
+    background-color: lightgray;
+    color: #333333;
+    height: 100%;
+    overflow: scroll;
+}
+p, table {
+    text-align: left;
 }

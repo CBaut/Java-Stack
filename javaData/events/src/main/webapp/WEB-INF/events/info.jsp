@@ -22,24 +22,24 @@ uri="http://www.springframework.org/tags/form" %>
       <a href="/events">Back To Dashboard...</a>
       <a href="/logout">Logout</a>
     </div>
-    <h1><c:out value="${event.name}" /></h1>
     <div class="row">
-      <div clas="col-md-6">
+      <div class="col-md-6">
+        <h1><c:out value="${event.name}" /></h1>
         <p class="lead">Host: <c:out value="${event.host.firstName}" /> <c:out value="${event.host.lastName}" /></p>
         <p class="lead">Date: <c:out value="${event.getDateString()}" /></p>
         <p class="lead">Location: <c:out value="${event.location}" />, <c:out value="${event.state}" /></p>
         <p class="lead">People who are attending this event: <c:out value="${event.users.size()}" /></p>
         <table class="table table-striped table-bordered table-hover table-condensed table-dark">
-          <thead>
-            <th id="name">Name</th>
-            <th id="location">Location</th>
-          </thead>
-          <c:forEach items="${event.users}" var="user">
-            <tr>
-              <td><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></td>
-              <td><c:out value="${user.location}" /></td>
-            </tr>
-          </c:forEach>
+        <thead>
+        <th id="name">Name</th>
+        <th id="location">Location</th>
+        </thead>
+        <c:forEach items="${event.users}" var="user">
+        <tr>
+        <td><c:out value="${user.firstName}" /> <c:out value="${user.lastName}" /></td>
+        <td><c:out value="${user.location}" /></td>
+        </tr>
+        </c:forEach>
         </table>
       </div>
       <div class="col-md-6">
@@ -62,10 +62,12 @@ uri="http://www.springframework.org/tags/form" %>
               <form:label path="body">Add Comment:</form:label>
               <form:errors path="body" class="errors" />
               <form:input type="text" path="body" class="form-control" />
-            <input
-              type="submit"
+              
+            <form:hidden path="event" value="${event.id}" />
+            <form:hidden path="user" value="${user.id}" />
+            <input type="submit"
               value="Create"
-              class="btn btn-outline-primary btn-block"
+              class="btn btn-outline-primary btn-block create"
             />
           </div>
         </form:form>

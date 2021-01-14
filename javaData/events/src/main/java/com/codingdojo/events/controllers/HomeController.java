@@ -200,8 +200,8 @@ public class HomeController {
 
     // create comment by user and add to event
     @PostMapping("/events/{id}/addcomment")
-    public String addComment(@PathVariable(value = "id") Long eventId, HttpSession session, Model model,
-            @Valid @ModelAttribute("comments") Comment comment, BindingResult result) {
+    public String addComment(@Valid @ModelAttribute("comments") Comment comment,
+            @PathVariable(value = "id") Long eventId, HttpSession session, Model model, BindingResult result) {
         if (result.hasErrors()) {
             System.out.println("found some errors... rendering info.jsp with error messages");
             User user = userService.findUserById((Long) session.getAttribute("uuid"));
@@ -211,10 +211,11 @@ public class HomeController {
             return "/events/info.jsp";
         }
         System.out.println("made it here to create comment!");
+        User user = userService.findUserById((Long) session.getAttribute("uuid"));
         Event thisEvent = eventService.findEventById(eventId);
-        User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
-        eventService.createComment(comment, thisEvent, thisUser);
-        System.out.println("saved comment! now redirecting to events info");
+        eventService.createComment(comment, thisEvent, user);
+        System.out.println("saved comment!" + comment.getEvent() + comment.getUser());
+        System.out.println("please work....");
         return "redirect:/events/" + eventId;
     }
 
