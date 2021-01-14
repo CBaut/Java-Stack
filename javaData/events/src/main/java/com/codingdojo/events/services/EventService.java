@@ -94,7 +94,11 @@ public class EventService {
     }
 
     // create a comment
-    public Comment createComment(Comment comment) {
+    public Comment createComment(Comment comment, Event event, User user) {
+        comment.setUser(user);
+        comment.setEvent(event);
+        event.addComment(comment);
+        this.eventRepository.save(event);
         return this.commentRepository.save(comment);
     }
 

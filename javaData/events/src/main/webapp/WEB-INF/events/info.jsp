@@ -27,7 +27,7 @@ uri="http://www.springframework.org/tags/form" %>
       <div clas="col-md-6">
         <p class="lead">Host: <c:out value="${event.host.firstName}" /> <c:out value="${event.host.lastName}" /></p>
         <p class="lead">Date: <c:out value="${event.getDateString()}" /></p>
-        <p class="lead">Location: <c:out value="${event.location}" /> <c:out value="${event.state}" /></p>
+        <p class="lead">Location: <c:out value="${event.location}" />, <c:out value="${event.state}" /></p>
         <p class="lead">People who are attending this event: <c:out value="${event.users.size()}" /></p>
         <table class="table table-striped table-bordered table-hover table-condensed table-dark">
           <thead>
@@ -44,7 +44,13 @@ uri="http://www.springframework.org/tags/form" %>
       </div>
       <div class="col-md-6">
         <h3>Message Wall</h3>
-        <div class="messages">{placeholder for loopy}</div>
+        <div class="messages">
+          <c:forEach items="${event.comments}" var="comment">
+            <p>
+              <c:out value="${comment.user.firstName}" /> says: <c:out value="${comment.body}" />
+            </p>
+          </c:forEach>
+        </div>
         <form:form
           method="POST"
           action="/events/${event.id}/addcomment"

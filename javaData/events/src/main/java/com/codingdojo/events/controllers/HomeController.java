@@ -124,7 +124,16 @@ public class HomeController {
         System.out.println("ran validations and now evaluating if errors...");
         if (result.hasErrors()) {
             System.out.println("found some errors... rendering dashboard.jsp with error messages");
+            // get user from session
+            User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
+            // query all events in state of user
+            List<Event> allEventsInState = eventService.findEventByState(thisUser.getState());
+            // query all events not in user state
+            List<Event> allEventsNotInState = eventService.findEventByStateNot(thisUser.getState());
+            model.addAttribute("user", thisUser);
             model.addAttribute("states", State.states);
+            model.addAttribute("eventsInState", allEventsInState);
+            model.addAttribute("eventsNotInState", allEventsNotInState);
             return "/events/dashboard.jsp";
         }
         // set session user as host
@@ -202,6 +211,10 @@ public class HomeController {
             return "/events/info.jsp";
         }
         System.out.println("made it here to create comment!");
+        Event thisEvent = eventService.findEventById(eventId);
+        User thisUser = userService.findUserById((Long) session.getAttribute("uuid"));
+        eventService.createComment(comment, thisEvent, thisUser);
+        System.out.println("saved comment! now redirecting to events info");
         return "redirect:/events/" + eventId;
     }
 
